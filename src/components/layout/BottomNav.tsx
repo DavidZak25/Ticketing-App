@@ -2,27 +2,38 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { usePathname, useRouter } from 'expo-router';
 
+type TabId = 'home' | 'explore' | 'tickets';
+
 type NavItem = {
   label: string;
   path: string;
+  tab: TabId;
 };
 
 const navItems: NavItem[] = [
-  { label: 'Home', path: '/' },
-  { label: 'Explore', path: '/explore' },
-  { label: 'Tickets', path: '/tickets' },
+  { label: 'Home', path: '/', tab: 'home' },
+  { label: 'Explore', path: '/explore', tab: 'explore' },
+  { label: 'Tickets', path: '/tickets', tab: 'tickets' },
 ];
+
+function getActiveTab(pathname: string): TabId | null {
+  if (pathname === '/') return 'home';
+  if (pathname === '/explore' || pathname.startsWith('/explore/')) return 'explore';
+  if (pathname === '/tickets' || pathname.startsWith('/tickets/')) return 'tickets';
+  return null;
+}
 
 export function BottomNav() {
   const router = useRouter();
   const pathname = usePathname();
+  const activeTab = getActiveTab(pathname);
 
   return (
     <View style={styles.container}>
       <View style={styles.glow} />
       <View style={styles.navBar}>
         {navItems.map((item) => {
-          const active = pathname === item.path;
+          const active = activeTab === item.tab;
           return (
             <Pressable
               key={item.label}

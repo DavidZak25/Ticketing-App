@@ -41,6 +41,7 @@ export type OrderStatus = 'paid' | 'pending' | 'cancelled';
 export type Order = {
   id: string;
   shortRef: string;
+  eventId: string;
   buyerName: string;
   eventName: string;
   quantity: number;

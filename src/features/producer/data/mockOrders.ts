@@ -4,6 +4,7 @@ export const MOCK_ORDERS: Order[] = [
   {
     id: 'ord_1',
     shortRef: '#1001',
+    eventId: '1',
     buyerName: 'Alex Rivera',
     eventName: 'Neon Pulse',
     quantity: 2,
@@ -13,6 +14,7 @@ export const MOCK_ORDERS: Order[] = [
   {
     id: 'ord_2',
     shortRef: '#1002',
+    eventId: '3',
     buyerName: 'Jordan Lee',
     eventName: 'Aurora Live',
     quantity: 1,
@@ -22,6 +24,7 @@ export const MOCK_ORDERS: Order[] = [
   {
     id: 'ord_3',
     shortRef: '#1003',
+    eventId: '2',
     buyerName: 'Sam Chen',
     eventName: 'Midnight Frequencies',
     quantity: 4,
@@ -31,6 +34,7 @@ export const MOCK_ORDERS: Order[] = [
   {
     id: 'ord_4',
     shortRef: '#1004',
+    eventId: '1',
     buyerName: 'Taylor Kim',
     eventName: 'Neon Pulse',
     quantity: 1,

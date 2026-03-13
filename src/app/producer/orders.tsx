@@ -1,7 +1,8 @@
-import React from 'react';
+import { useLocalSearchParams } from 'expo-router';
 
 import { ManageOrdersScreen } from '@/features/producer/screens/ManageOrdersScreen';
 
 export default function OrdersRoute() {
-  return <ManageOrdersScreen />;
+  const { eventId } = useLocalSearchParams<{ eventId?: string }>();
+  return <ManageOrdersScreen eventId={eventId} />;
 }

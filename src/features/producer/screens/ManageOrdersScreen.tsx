@@ -12,14 +12,23 @@ import {
   type OrdersFilterValue,
 } from '@/features/producer/components/OrdersFilterBar';
 import { MOCK_ORDERS } from '@/features/producer/data/mockOrders';
+import { getProducerEventById } from '@/features/producer/lib/getProducerEventById';
 
-export function ManageOrdersScreen() {
+type Props = {
+  eventId?: string;
+};
+
+export function ManageOrdersScreen({ eventId }: Props) {
   const [filter, setFilter] = useState<OrdersFilterValue>('all');
+  const event = eventId ? getProducerEventById(eventId) : null;
 
   const filteredOrders = useMemo(() => {
-    if (filter === 'all') return MOCK_ORDERS;
-    return MOCK_ORDERS.filter((o) => o.status === filter);
-  }, [filter]);
+    const byEvent = eventId
+      ? MOCK_ORDERS.filter((o) => o.eventId === eventId)
+      : MOCK_ORDERS;
+    if (filter === 'all') return byEvent;
+    return byEvent.filter((o) => o.status === filter);
+  }, [eventId, filter]);
 
   const hasOrders = filteredOrders.length > 0;
 
@@ -33,6 +42,11 @@ export function ManageOrdersScreen() {
           <ThemedText type="title" style={styles.title}>
             Manage orders
           </ThemedText>
+          {event && (
+            <ThemedText type="small" themeColor="textSecondary" style={styles.eventContext}>
+              For: {event.title}
+            </ThemedText>
+          )}
         </View>
 
         <OrdersFilterBar value={filter} onChange={setFilter} />
@@ -68,6 +82,9 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: Spacing.one,
+  },
+  eventContext: {
+    marginTop: Spacing.half,
   },
   scrollContent: {
     paddingBottom: Spacing.six,

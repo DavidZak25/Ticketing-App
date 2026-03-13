@@ -79,7 +79,7 @@ export function ProducerEventManagementScreen({ eventId }: Props) {
               <ProducerEventActionCard
                 title="Manage orders"
                 subtitle="View orders for this event"
-                onPress={() => router.push('/producer/orders')}
+                onPress={() => router.push(`/producer/orders?eventId=${event.id}`)}
               />
               <ProducerEventActionCard
                 title="Scan entry"

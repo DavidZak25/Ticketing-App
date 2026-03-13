@@ -1,56 +1,30 @@
-# Welcome to your Expo app 👋
+# Ticketing App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Event ticketing MVP: browse events, view details, manage tickets, and (for producers) manage events and orders. Built with Expo (React Native) and prepared for Firebase and Stripe integration.
 
-## Get started
+## Stack
 
-1. Install dependencies
+- **Expo** (React Native) with **Expo Router** (file-based routing)
+- **Firebase** (Auth, Firestore, Cloud Functions) — configured but not yet wired for real data
+- **Stripe** — backend webhook present; payment flow not yet connected in the app
 
-   ```bash
-   npm install
-   ```
+## Route areas
 
-2. Start the app
+- **User:** Home (`/`), Explore (`/explore`), Event Details (`/events/[id]`), My Tickets (`/tickets`), QR Scan Entry (`/scan`)
+- **Producer:** Dashboard (`/producer`), Create Event (`/producer/create-event`), Manage Orders (`/producer/orders`), Event Management (`/producer/events/[id]`)
 
-   ```bash
-   npx expo start
-   ```
+Bottom nav: Home, Explore, Tickets. Producer and Scan are reached by direct navigation (e.g. from dashboard or links).
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run locally
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Then open in a simulator, emulator, or Expo Go.
 
-### Other setup steps
+## What’s mock vs not integrated
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **Mock (local data only):** Events list, event details lookup, tickets list, orders list, producer dashboard stats, producer event details, scan result. All use in-memory or static mock data.
+- **Ready for integration:** Same route and screen structure; swap mock data for Firestore/API calls (e.g. `getEventById`, `getProducerEventById`, orders query, tickets query). Auth, payments, and image upload are not implemented in the app yet.
